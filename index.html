@@ -4,10 +4,8 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>API reference</title>
 
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -88,10 +86,12 @@
   color: #90a959;
 }
     </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -102,8 +102,6 @@
       <img src="images/logo.png" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -121,87 +119,72 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Market Alerts is a simple API to calculate market indicators and signals across different timeframes in Commodity, Bonds, Stock Indices and FX markets.</p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>The API works in a REST like manner over HTTP, and covers 3 main areas:</p>
 
-<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
+<ul>
+<li>Market Data
+
+<ul>
+<li>Download historical open,high,low,close data for various symbols in different timeframes.</li>
+</ul></li>
+<li>Indicators
+
+<ul>
+<li>Calculate different technical indicators
+
+<ul>
+<li>RSI, Moving averages, MACD, Bollinger Bands, Average True Range</li>
+</ul></li>
+</ul></li>
+<li>Signals
+
+<ul>
+<li>Test for the existence of market signals, eg:
+
+<ul>
+<li>close &gt; ema(close,200) # Price closed above 200-day moving average</li>
+<li>crossoverup(rsi(close,14),70) # RSI just went above 70</li>
+</ul></li>
+</ul></li>
+</ul>
 
 <h1 id="authentication">Authentication</h1>
 
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p>MarketAlerts is open for beta and does not currently require Authentication.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<h1 id="api-reference">API Reference</h1>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-<h1 id="kittens">Kittens</h1>
-
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<h2 id="indicators">indicators</h2>
+<pre class="highlight shell"><code>curl <span class="se">\</span>
+<span class="s2">"http://api.fxhistoricaldata.com/v1/indicators?e=close,ema(close,200),rsi(close,14)&amp;s=USDJPY"</span>
 </code></pre>
 
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="err">results:</span><span class="w"> </span><span class="err">{</span><span class="w">
+        </span><span class="err">USDJPY:</span><span class="w"> </span><span class="err">{</span><span class="w">
+            </span><span class="err">data:</span><span class="w"> </span><span class="err">[</span><span class="w">
+                </span><span class="err">[</span><span class="w">
+                </span><span class="nt">"2016-10-07 00:00:00"</span><span class="err">,</span><span class="w">
+                </span><span class="nt">"103.1000"</span><span class="err">,</span><span class="w">
+                </span><span class="nt">"107.5165"</span><span class="err">,</span><span class="w">
+                </span><span class="nt">"57.80"</span><span class="w">
+                </span><span class="err">]</span><span class="w">
+            </span><span class="err">]</span><span class="w">
+        </span><span class="err">}</span><span class="w">
+    </span><span class="err">}</span><span class="w">
+</span><span class="err">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves all kittens.</p>
+<p>This endpoint retrieves market data and calculates technical indicators</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
+<p><code class="prettyprint">GET http://api.fxhistoricaldata.com/v1/indicators</code></p>
 
 <h3 id="query-parameters">Query Parameters</h3>
 
@@ -213,57 +196,55 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>e</td>
+<td>N/A</td>
+<td>A comma separated list of technical indicators to be calculated.</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>s</td>
+<td>N/A</td>
+<td>A list of symbols for which to calculate technical indicators.</td>
+</tr>
+<tr>
+<td>t</td>
+<td>day</td>
+<td>The timeframe of the request. One of &lsquo;5min&rsquo;, &#39;15min&rsquo;, &#39;30min&rsquo;, &#39;hour&rsquo;, &#39;2hour&rsquo;, &#39;3hour&rsquo;, &#39;4hour&rsquo;, &#39;day&rsquo;.</td>
+</tr>
+<tr>
+<td>d</td>
+<td>1</td>
+<td>The number of data items to return.</td>
 </tr>
 </tbody></table>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<h2 id="signals">signals</h2>
+<pre class="highlight shell"><code>curl <span class="se">\</span>
+<span class="s2">"http://api.fxhistoricaldata.com/v1/signals?e=close&gt;ema(close,200) and rsi(close,14)&lt;50&amp;s=USDJPY"</span>
 </code></pre>
 
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
+    </span><span class="err">results:</span><span class="w"> </span><span class="err">{</span><span class="w">
+        </span><span class="err">USDJPY:</span><span class="w"> </span><span class="err">{</span><span class="w">
+            </span><span class="err">data:</span><span class="w"> </span><span class="err">[</span><span class="w">
+                </span><span class="err">[</span><span class="w">
+                    </span><span class="nt">"2016-10-07 00:00:00"</span><span class="w">
+                </span><span class="err">]</span><span class="w">
+            </span><span class="err">]</span><span class="w">
+        </span><span class="err">}</span><span class="w">
+    </span><span class="err">}</span><span class="w">
+</span><span class="err">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<p>This endpoint calculates signals ie: rsi crossed above 70, closing price is above upper bollinger band, etc</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<p><code class="prettyprint">GET http://api.fxhistoricaldata.com/v1/signals</code></p>
 
-<h3 id="url-parameters">URL Parameters</h3>
+<h3 id="query-parameters">Query Parameters</h3>
 
 <table><thead>
 <tr>
@@ -272,16 +253,227 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>e</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>s</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>t</td>
+<td>day</td>
+</tr>
+<tr>
+<td>d</td>
+<td>1</td>
 </tr>
 </tbody></table>
 
+<h1 id="function-reference">Function reference</h1>
+
+<aside class="notice">
+Expressions can be arbitrarly nested, ie: <code>rsi(ema(close,20),14</code>
+</aside>
+
+<h2 id="open-high-low-close">open,high,low,close</h2>
+
+<p>The open, high, low and closing price of the security in the given timeframe.</p>
+
+<h2 id="ema-expression-n">ema(expression, n)</h2>
+<pre class="highlight shell"><code>ema<span class="o">(</span>close,200<span class="o">)</span>
+ema<span class="o">(</span>abs<span class="o">(</span>high-low<span class="o">)</span>,20<span class="o">)</span>
+</code></pre>
+
+<p>Exponential moving average of expression of n periods</p>
+
+<h2 id="sma-expression-n">sma(expression, n)</h2>
+<pre class="highlight shell"><code>sma<span class="o">(</span>close,200<span class="o">)</span>
+sma<span class="o">(</span>abs<span class="o">(</span>high-low<span class="o">)</span>,20<span class="o">)</span>
+</code></pre>
+
+<p>Simple moving average of expression over n periods</p>
+
+<h2 id="rsi-expression-n">rsi(expression, n)</h2>
+<pre class="highlight shell"><code>rsi<span class="o">(</span>close,14<span class="o">)</span>
+</code></pre>
+
+<p>Relative strength index of expression over n periods</p>
+
+<h2 id="max-expression-n">max(expression, n)</h2>
+<pre class="highlight shell"><code>max<span class="o">(</span>high,10<span class="o">)</span>
+</code></pre>
+
+<p>Maximum value of expression over n periods</p>
+
+<h2 id="min-expression-n">min(expression, n)</h2>
+<pre class="highlight shell"><code>min<span class="o">(</span>low,10<span class="o">)</span>
+</code></pre>
+
+<p>Minimum value of expression over n periods</p>
+
+<h2 id="tr">tr()</h2>
+<pre class="highlight shell"><code>tr<span class="o">()</span>
+</code></pre>
+
+<p>True range is defined as:
+max[ (high-low), abs(high - previous_close), abs(low - previous_close) ]</p>
+
+<h2 id="atr-n">atr(n)</h2>
+<pre class="highlight shell"><code>atr<span class="o">(</span>14<span class="o">)</span>
+</code></pre>
+
+<p>Average true range over n periods (eg: atr(14) )</p>
+
+<h2 id="previous-expression-n">previous(expression, n)</h2>
+<pre class="highlight shell"><code>previous<span class="o">(</span>close, 1<span class="o">)</span>
+</code></pre>
+
+<p>Value of expression n periods ago, useful to calculate crossover signals </p>
+
+<h2 id="bolhigh-expression-n-y">bolhigh(expression, n, y)</h2>
+<pre class="highlight shell"><code>bolhigh<span class="o">(</span>close,21,2<span class="o">)</span>
+</code></pre>
+
+<p>Upper bollinger band of expression </p>
+
+<h2 id="bollow-expression-n-y">bollow(expression, n, y)</h2>
+<pre class="highlight shell"><code>bollow<span class="o">(</span>close, 21, 2<span class="o">)</span>
+</code></pre>
+
+<p>Lower bollinger band of expression </p>
+
+<h2 id="macd-expression-shortperiod-longperiod-smoothingperiod">macd(expression, shortperiod, longperiod, smoothingperiod)</h2>
+<pre class="highlight shell"><code>macd<span class="o">(</span>close, 12, 26, 9<span class="o">)</span>
+</code></pre>
+
+<p>Macd value of expression</p>
+
+<h2 id="macdsig-expression-shortperiod-longperiod-smoothingperiod">macdsig(expression, shortperiod, longperiod, smoothingperiod)</h2>
+<pre class="highlight shell"><code>macdsig<span class="o">(</span>close, 12, 26, 9<span class="o">)</span>
+</code></pre>
+
+<p>Macd signal value of expression</p>
+
+<h2 id="macddiff-expression-shortperiod-longperiod-smoothingperiod">macddiff(expression, shortperiod, longperiod, smoothingperiod)</h2>
+<pre class="highlight shell"><code>macddiff<span class="o">(</span>close, 12, 26, 9<span class="o">)</span>
+</code></pre>
+
+<p>Difference between macd and the macd signal (eg: macddiff(close, 12, 26, 9) )</p>
+
+<h2 id="abs-expression">abs(expression)</h2>
+<pre class="highlight shell"><code>abs<span class="o">(</span> close - previous<span class="o">(</span>close,1<span class="o">)</span> <span class="o">)</span>
+</code></pre>
+
+<p>Returns absolute value of expression (eg: abs(close - previous(close, 1)) )</p>
+
+<h1 id="signal-reference">Signal reference</h1>
+
+<h2 id="crossoverup-expression1-expression2">crossoverup(expression1,expression2)</h2>
+<pre class="highlight shell"><code>crossoverup<span class="o">(</span>close,ema<span class="o">(</span>close,200<span class="o">))</span>
+</code></pre>
+
+<p>True when expression1 goes above expression2 in this period.</p>
+
+<h2 id="crossoverdown-expression1-expression2">crossoverdown(expression1,expression2)</h2>
+<pre class="highlight shell"><code>crossoverdown<span class="o">(</span>close,ema<span class="o">(</span>close,200<span class="o">))</span>
+</code></pre>
+
+<p>True when expression1 goes below expression2 in this period.a</p>
+
+<h2 id="expression1-compare_to-expression2">expression1 compare_to expression2</h2>
+<pre class="highlight shell"><code>ema<span class="o">(</span>close,50<span class="o">)</span> &gt;  ema<span class="o">(</span>close,200<span class="o">)</span>
+ema<span class="o">(</span>close,50<span class="o">)</span> &gt;<span class="o">=</span> ema<span class="o">(</span>close,200<span class="o">)</span>
+ema<span class="o">(</span>close,50<span class="o">)</span> &lt;  ema<span class="o">(</span>close,200<span class="o">)</span>
+ema<span class="o">(</span>close,50<span class="o">)</span> &lt;<span class="o">=</span> ema<span class="o">(</span>close,200<span class="o">)</span>
+</code></pre>
+
+<p>Compares expression1 to expression2, ie, greater, greater than, lesser, lesser than.</p>
+
+<h2 id="multiple-timeframe-signals">Multiple timeframe signals</h2>
+<pre class="highlight shell"><code>day<span class="o">(</span>close &gt; ema<span class="o">(</span>close,200<span class="o">))</span> and 4hour<span class="o">(</span>close &lt; ema<span class="o">(</span>close,200<span class="o">))</span>
+</code></pre>
+
+<p>Compare signals in different timeframes. When using expressions with multiple timeframe signals, the timeframe querystring parameter is ignored.  The following timeframe functions are available:</p>
+
+<ul>
+<li>5min</li>
+<li>15min</li>
+<li>30min</li>
+<li>hour</li>
+<li>2hour</li>
+<li>3hour</li>
+<li>4hour</li>
+<li>day</li>
+</ul>
+
+<h1 id="available-markets">Available markets</h1>
+
+<p>The symbols that can be passed to the &rsquo;s&rsquo; argument of the API endpoints are:</p>
+
+<h2 id="forex">Forex</h2>
+
+<ul>
+<li>AUDUSD</li>
+<li>AUDJPY</li>
+<li>AUDNZD</li>
+<li>CHFJPY</li>
+<li>EURCAD</li>
+<li>EURCHF</li>
+<li>EURGBP</li>
+<li>EURJPY</li>
+<li>EURUSD</li>
+<li>GBPCHF</li>
+<li>GBPJPY</li>
+<li>GBPNZD</li>
+<li>GBPUSD</li>
+<li>NZDUSD</li>
+<li>NZDJPY</li>
+<li>USDCAD</li>
+<li>USDCHF</li>
+<li>USDHKD</li>
+<li>USDJPY</li>
+<li>USDOLLAR</li>
+</ul>
+
+<h2 id="commodities-bonds">Commodities/Bonds</h2>
+
+<ul>
+<li>XAUUSD</li>
+<li>XAGUSD</li>
+<li>UKOil</li>
+<li>USOil</li>
+<li>Bund</li>
+</ul>
+
+<h2 id="stock-market-indices">Stock Market Indices</h2>
+
+<ul>
+<li>AUS200</li>
+<li>ESP35</li>
+<li>FRA40</li>
+<li>GER30</li>
+<li>HKG33</li>
+<li>JPN225</li>
+<li>NAS100</li>
+<li>SPX500</li>
+<li>UK100</li>
+<li>US30</li>
+</ul>
+
           <h1 id="errors">Errors</h1>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+<blockquote>
+<p>The API returns structured errors that look like:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error_id"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Error description"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"More detailed information about how to resolve the error"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<p>The Kittn API uses the following error codes:</p>
+<p>The API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -291,39 +483,7 @@ Remember — a happy kitten is an authenticated kitten!
 </thead><tbody>
 <tr>
 <td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+<td>Bad Request &ndash; The input in the request is invalid. Check error message and URL for help fixing the request.</td>
 </tr>
 <tr>
 <td>500</td>
@@ -339,8 +499,6 @@ Remember — a happy kitten is an authenticated kitten!
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
           </div>
       </div>
     </div>
