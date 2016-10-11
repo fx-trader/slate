@@ -202,6 +202,7 @@ rsi<span class="o">(</span>ema<span class="o">(</span>close,20<span class="o">)<
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Required</th>
 <th>Default</th>
 <th>Description</th>
 </tr>
@@ -209,21 +210,25 @@ rsi<span class="o">(</span>ema<span class="o">(</span>close,20<span class="o">)<
 <tr>
 <td>expression</td>
 <td>Yes</td>
+<td></td>
 <td>A comma separated list of technical indicators to be calculated.</td>
 </tr>
 <tr>
 <td>instruments</td>
 <td>Yes</td>
+<td></td>
 <td>A list of instruments for which to calculate the indicators expression. See the <a href='#available-markets'>list of available instruments</a>.</td>
 </tr>
 <tr>
 <td>timeframe</td>
-<td>No (day)</td>
+<td>No</td>
+<td>day</td>
 <td>The timeframe of the request. One of &lsquo;5min&rsquo;, &#39;15min&rsquo;, &#39;30min&rsquo;, &#39;hour&rsquo;, &#39;2hour&rsquo;, &#39;3hour&rsquo;, &#39;4hour&rsquo;, &#39;day&rsquo;.  This is ignored if the expression uses multiple timeframe signals.</td>
 </tr>
 <tr>
 <td>itemcount</td>
-<td>No (1)</td>
+<td>No</td>
+<td>1</td>
 <td>The number of data items to return.</td>
 </tr>
 </tbody></table>
@@ -271,28 +276,45 @@ day<span class="o">(</span>close &gt; ema<span class="o">(</span>close,200<span 
 <tr>
 <th>Parameter</th>
 <th>Required</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>expression</td>
 <td>Yes</td>
+<td></td>
 <td>The signal expression to be evaluated.</td>
 </tr>
 <tr>
 <td>instruments</td>
 <td>Yes</td>
+<td></td>
 <td>A list of instruments for which to calculate the signal expression. See the <a href='#available-markets'>list of available instruments</a>.</td>
 </tr>
 <tr>
 <td>timeframe</td>
-<td>No (day)</td>
+<td>No</td>
+<td>day</td>
 <td>The timeframe of the request. One of &#39;5min&rsquo;, &#39;15min&rsquo;, &#39;30min&rsquo;, &#39;hour&rsquo;, &#39;2hour&rsquo;, &#39;3hour&rsquo;, &#39;4hour&rsquo;, &#39;day&rsquo;.  This is ignored if the expression uses multiple timeframe signals.</td>
 </tr>
 <tr>
 <td>itemcount</td>
-<td>No (1)</td>
-<td>The number of data items to return.</td>
+<td>No</td>
+<td>1</td>
+<td>The maximum number of data items to return.</td>
+</tr>
+<tr>
+<td>start_period</td>
+<td>No</td>
+<td>3 months ago</td>
+<td>A datetime in the UTC timezone representing the date of the earliest signal to be returned</td>
+</tr>
+<tr>
+<td>end_period</td>
+<td>No</td>
+<td>now</td>
+<td>A datetime in the UTC timezone representing the date of the lastest signal to be returned</td>
 </tr>
 </tbody></table>
 
