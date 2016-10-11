@@ -433,6 +433,41 @@ ema<span class="o">(</span>close,50<span class="o">)</span> &lt;<span class="o">
 <li>day</li>
 </ul>
 
+<h3 id="limitations">Limitations</h3>
+
+<h4 id="unique-timeframe-functions">Unique timeframe functions</h4>
+
+<blockquote>
+<p>This doesn&rsquo;t work</p>
+</blockquote>
+<pre class="highlight shell"><code>hour<span class="o">(</span>close &gt; ema<span class="o">(</span>close,21<span class="o">))</span> and hour<span class="o">(</span>ema<span class="o">(</span>close,21<span class="o">)</span> &gt; ema<span class="o">(</span>close,50<span class="o">))</span> and 2hour<span class="o">(</span>close &gt; ema<span class="o">(</span>close,21<span class="o">))</span>
+</code></pre>
+
+<blockquote>
+<p>But this does</p>
+</blockquote>
+<pre class="highlight shell"><code>hour<span class="o">(</span>close &gt; ema<span class="o">(</span>close,21<span class="o">)</span> and ema<span class="o">(</span>close,21<span class="o">)</span> &gt; ema<span class="o">(</span>close,50<span class="o">))</span> and 2hour<span class="o">(</span>close &gt; ema<span class="o">(</span>close,21<span class="o">))</span>
+</code></pre>
+
+<p>A timeframe function can only be called once per expression, however, multiple expressions can exist inside a timeframe function.</p>
+
+<h4 id="boolean-combinations">Boolean combinations</h4>
+
+<blockquote>
+<p>This doesn&rsquo;t work</p>
+</blockquote>
+<pre class="highlight shell"><code>hour<span class="o">(</span>signal_expression<span class="o">)</span> and 2hour<span class="o">(</span>signal_expression<span class="o">)</span> or hour<span class="o">(</span>signal_expression<span class="o">)</span>
+</code></pre>
+
+<blockquote>
+<p>But these do</p>
+</blockquote>
+<pre class="highlight shell"><code>hour<span class="o">(</span>signal_expression<span class="o">)</span> and 2hour<span class="o">(</span>signal_expression<span class="o">)</span> and hour<span class="o">(</span>signal_expression<span class="o">)</span>
+hour<span class="o">(</span>signal_expression<span class="o">)</span> or  2hour<span class="o">(</span>signal_expression<span class="o">)</span> or  hour<span class="o">(</span>signal_expression<span class="o">)</span>
+</code></pre>
+
+<p>Signal expressions with multiple timeframes are only supported when the different timeframe functions are joined by the same boolean operator (one of &#39;and&rsquo;,&#39;or&rsquo;).</p>
+
 <h1 id="available-markets">Available markets</h1>
 
 <p>The list of instruments available can be retrieved programmatically with a get request to the instruments endpoint.</p>
