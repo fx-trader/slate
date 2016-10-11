@@ -157,8 +157,19 @@
 <h1 id="api-reference">API Reference</h1>
 
 <h2 id="indicators">indicators</h2>
+
+<blockquote>
+<p>See also the full <a href='#function-reference'>indicator function reference</a></p>
+</blockquote>
 <pre class="highlight shell"><code>curl <span class="se">\</span>
 <span class="s2">"http://api.fxhistoricaldata.com/v1/indicators?expression=close,ema(close,200),rsi(close,14)&amp;instruments=USDJPY"</span>
+
+<span class="c"># Example expressions</span>
+open,high,low,close
+rsi<span class="o">(</span>close,14<span class="o">)</span>
+ema<span class="o">(</span>close,200<span class="o">)</span>
+rsi<span class="o">(</span>ema<span class="o">(</span>close,20<span class="o">)</span>,14<span class="o">)</span>
+
 </code></pre>
 
 <blockquote>
@@ -218,8 +229,18 @@
 </tbody></table>
 
 <h2 id="signals">signals</h2>
+
+<blockquote>
+<p>See also the full <a href='#signal-reference'>signal expression reference</a></p>
+</blockquote>
 <pre class="highlight shell"><code>curl <span class="se">\</span>
 <span class="s2">"http://api.fxhistoricaldata.com/v1/signals?expression=close&gt;ema(close,200) and rsi(close,14)&lt;50&amp;s=USDJPY"</span>
+
+<span class="c"># Example expressions</span>
+rsi<span class="o">(</span>close,14<span class="o">)</span> &gt; 70
+close &gt; ema<span class="o">(</span>close,200<span class="o">)</span>
+<span class="c"># Mixed timeframes are also allowed in expressions</span>
+day<span class="o">(</span>close &gt; ema<span class="o">(</span>close,200<span class="o">))</span> and 4hour<span class="o">(</span>close &lt; ema<span class="o">(</span>close,200<span class="o">))</span>
 </code></pre>
 
 <blockquote>
@@ -378,13 +399,13 @@ max[ (high-low), abs(high - previous_close), abs(low - previous_close) ]</p>
 <pre class="highlight shell"><code>crossoverup<span class="o">(</span>close,ema<span class="o">(</span>close,200<span class="o">))</span>
 </code></pre>
 
-<p>True when expression1 goes above expression2 in this period.</p>
+<p>True when expression1 goes above expression2.</p>
 
 <h2 id="crossoverdown-expression1-expression2">crossoverdown(expression1,expression2)</h2>
 <pre class="highlight shell"><code>crossoverdown<span class="o">(</span>close,ema<span class="o">(</span>close,200<span class="o">))</span>
 </code></pre>
 
-<p>True when expression1 goes below expression2 in this period.a</p>
+<p>True when expression1 goes below expression2.</p>
 
 <h2 id="expression1-compare_to-expression2">expression1 compare_to expression2</h2>
 <pre class="highlight shell"><code>ema<span class="o">(</span>close,50<span class="o">)</span> &gt;  ema<span class="o">(</span>close,200<span class="o">)</span>
