@@ -127,7 +127,7 @@
 <li>Market Data
 
 <ul>
-<li>Download historical open,high,low,close data for various symbols in different timeframes.</li>
+<li>Download historical open,high,low,close data for various instruments in different timeframes.</li>
 </ul></li>
 <li>Indicators
 
@@ -158,27 +158,27 @@
 
 <h2 id="indicators">indicators</h2>
 <pre class="highlight shell"><code>curl <span class="se">\</span>
-<span class="s2">"http://api.fxhistoricaldata.com/v1/indicators?e=close,ema(close,200),rsi(close,14)&amp;s=USDJPY"</span>
+<span class="s2">"http://api.fxhistoricaldata.com/v1/indicators?expression=close,ema(close,200),rsi(close,14)&amp;instruments=USDJPY"</span>
 </code></pre>
 
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="err">results:</span><span class="w"> </span><span class="err">{</span><span class="w">
-        </span><span class="err">USDJPY:</span><span class="w"> </span><span class="err">{</span><span class="w">
-            </span><span class="err">data:</span><span class="w"> </span><span class="err">[</span><span class="w">
-                </span><span class="err">[</span><span class="w">
-                </span><span class="nt">"2016-10-07 00:00:00"</span><span class="err">,</span><span class="w">
-                </span><span class="nt">"103.1000"</span><span class="err">,</span><span class="w">
-                </span><span class="nt">"107.5165"</span><span class="err">,</span><span class="w">
-                </span><span class="nt">"57.80"</span><span class="w">
-                </span><span class="err">]</span><span class="w">
-            </span><span class="err">]</span><span class="w">
-        </span><span class="err">}</span><span class="w">
-    </span><span class="err">}</span><span class="w">
-</span><span class="err">}</span><span class="w">
-</span></code></pre>
+<pre class="highlight shell"><code><span class="o">{</span>
+    results: <span class="o">{</span>
+        USDJPY: <span class="o">{</span>
+            data: <span class="o">[</span>
+                <span class="o">[</span>
+                <span class="s2">"2016-10-07 00:00:00"</span>,
+                <span class="s2">"103.1000"</span>,
+                <span class="s2">"107.5165"</span>,
+                <span class="s2">"57.80"</span>
+                <span class="o">]</span>
+            <span class="o">]</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
 
 <p>This endpoint retrieves market data and calculates technical indicators</p>
 
@@ -196,47 +196,47 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>e</td>
-<td>N/A</td>
+<td>expression</td>
+<td>Yes</td>
 <td>A comma separated list of technical indicators to be calculated.</td>
 </tr>
 <tr>
-<td>s</td>
-<td>N/A</td>
-<td>A list of symbols for which to calculate technical indicators.</td>
+<td>instruments</td>
+<td>Yes</td>
+<td>A list of instruments for which to calculate the indicators expression. See http://api.fxhistoricaldata.com/v1/instruments for a list of available instruments.</td>
 </tr>
 <tr>
-<td>t</td>
-<td>day</td>
-<td>The timeframe of the request. One of &lsquo;5min&rsquo;, &#39;15min&rsquo;, &#39;30min&rsquo;, &#39;hour&rsquo;, &#39;2hour&rsquo;, &#39;3hour&rsquo;, &#39;4hour&rsquo;, &#39;day&rsquo;.</td>
+<td>timeframe</td>
+<td>No (day)</td>
+<td>The timeframe of the request. One of &lsquo;5min&rsquo;, &#39;15min&rsquo;, &#39;30min&rsquo;, &#39;hour&rsquo;, &#39;2hour&rsquo;, &#39;3hour&rsquo;, &#39;4hour&rsquo;, &#39;day&rsquo;.  This is ignored if the expression uses multiple timeframe signals.</td>
 </tr>
 <tr>
-<td>d</td>
-<td>1</td>
+<td>itemcount</td>
+<td>No (1)</td>
 <td>The number of data items to return.</td>
 </tr>
 </tbody></table>
 
 <h2 id="signals">signals</h2>
 <pre class="highlight shell"><code>curl <span class="se">\</span>
-<span class="s2">"http://api.fxhistoricaldata.com/v1/signals?e=close&gt;ema(close,200) and rsi(close,14)&lt;50&amp;s=USDJPY"</span>
+<span class="s2">"http://api.fxhistoricaldata.com/v1/signals?expression=close&gt;ema(close,200) and rsi(close,14)&lt;50&amp;s=USDJPY"</span>
 </code></pre>
 
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="err">results:</span><span class="w"> </span><span class="err">{</span><span class="w">
-        </span><span class="err">USDJPY:</span><span class="w"> </span><span class="err">{</span><span class="w">
-            </span><span class="err">data:</span><span class="w"> </span><span class="err">[</span><span class="w">
-                </span><span class="err">[</span><span class="w">
-                    </span><span class="nt">"2016-10-07 00:00:00"</span><span class="w">
-                </span><span class="err">]</span><span class="w">
-            </span><span class="err">]</span><span class="w">
-        </span><span class="err">}</span><span class="w">
-    </span><span class="err">}</span><span class="w">
-</span><span class="err">}</span><span class="w">
-</span></code></pre>
+<pre class="highlight shell"><code><span class="o">{</span>
+    results: <span class="o">{</span>
+        USDJPY: <span class="o">{</span>
+            data: <span class="o">[</span>
+                <span class="o">[</span>
+                    <span class="s2">"2016-10-07 00:00:00"</span>
+                <span class="o">]</span>
+            <span class="o">]</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
 
 <p>This endpoint calculates signals ie: rsi crossed above 70, closing price is above upper bollinger band, etc</p>
 
@@ -249,24 +249,29 @@
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Required</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>e</td>
-<td>N/A</td>
+<td>expression</td>
+<td>Yes</td>
+<td>The signal expression to be evaluated.</td>
 </tr>
 <tr>
-<td>s</td>
-<td>N/A</td>
+<td>instruments</td>
+<td>Yes</td>
+<td>A list of instruments for which to calculate the signal expression. See http://api.fxhistoricaldata.com/v1/instruments for a list of available instruments.</td>
 </tr>
 <tr>
-<td>t</td>
-<td>day</td>
+<td>timeframe</td>
+<td>No (day)</td>
+<td>The timeframe of the request. One of &#39;5min&rsquo;, &#39;15min&rsquo;, &#39;30min&rsquo;, &#39;hour&rsquo;, &#39;2hour&rsquo;, &#39;3hour&rsquo;, &#39;4hour&rsquo;, &#39;day&rsquo;.  This is ignored if the expression uses multiple timeframe signals.</td>
 </tr>
 <tr>
-<td>d</td>
-<td>1</td>
+<td>itemcount</td>
+<td>No (1)</td>
+<td>The number of data items to return.</td>
 </tr>
 </tbody></table>
 
@@ -409,7 +414,10 @@ ema<span class="o">(</span>close,50<span class="o">)</span> &lt;<span class="o">
 
 <h1 id="available-markets">Available markets</h1>
 
-<p>The symbols that can be passed to the &rsquo;s&rsquo; argument of the API endpoints are:</p>
+<p>The list of instruments available can be retrieved programmatically with a get request to the instruments endpoint.</p>
+<pre class="highlight shell"><code>curl <span class="se">\</span>
+http://api.fxhistoricaldata.com/v1/instruments
+</code></pre>
 
 <h2 id="forex">Forex</h2>
 
