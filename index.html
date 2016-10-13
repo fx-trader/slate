@@ -223,7 +223,7 @@ rsi<span class="o">(</span>ema<span class="o">(</span>close,20<span class="o">)<
 <td>timeframe</td>
 <td>No</td>
 <td>day</td>
-<td>The timeframe of the request. One of &lsquo;5min&rsquo;, &#39;15min&rsquo;, &#39;30min&rsquo;, &#39;hour&rsquo;, &#39;2hour&rsquo;, &#39;3hour&rsquo;, &#39;4hour&rsquo;, &#39;day&rsquo;.  This is ignored if the expression uses multiple timeframe signals.</td>
+<td>The timeframe of the request. One of &lsquo;5min&rsquo;, &#39;15min&rsquo;, &#39;30min&rsquo;, &#39;hour&rsquo;, &#39;2hour&rsquo;, &#39;3hour&rsquo;, &#39;4hour&rsquo;, &#39;day&rsquo;.  See also <a href='#available-timeframes'>available timeframes</a>.</td>
 </tr>
 <tr>
 <td>item_count</td>
@@ -296,7 +296,7 @@ day<span class="o">(</span>close &gt; ema<span class="o">(</span>close,200<span 
 <td>timeframe</td>
 <td>No</td>
 <td>day</td>
-<td>The timeframe of the request. One of &#39;5min&rsquo;, &#39;15min&rsquo;, &#39;30min&rsquo;, &#39;hour&rsquo;, &#39;2hour&rsquo;, &#39;3hour&rsquo;, &#39;4hour&rsquo;, &#39;day&rsquo;.  This is ignored if the expression uses multiple timeframe signals.</td>
+<td>The timeframe of the request. One of &#39;5min&rsquo;, &#39;15min&rsquo;, &#39;30min&rsquo;, &#39;hour&rsquo;, &#39;2hour&rsquo;, &#39;3hour&rsquo;, &#39;4hour&rsquo;, &#39;day&rsquo;.  This is ignored if the expression uses multiple timeframe signals. See also <a href='#available-timeframes'>available timeframes</a>.</td>
 </tr>
 <tr>
 <td>item_count</td>
@@ -489,6 +489,13 @@ hour<span class="o">(</span>signal_expression<span class="o">)</span> or  2hour<
 </code></pre>
 
 <p>Signal expressions with multiple timeframes are only supported when the different timeframe functions are joined by the same boolean operator (one of &#39;and&rsquo;,&#39;or&rsquo;).</p>
+
+<h1 id="available-timeframes">Available timeframes</h1>
+
+<p>The list of timeframes available can be retrieved programmatically with a get request to the timeframes endpoint.</p>
+<pre class="highlight shell"><code>curl <span class="se">\</span>
+http://api.fxhistoricaldata.com/v1/timeframes
+</code></pre>
 
 <h1 id="available-markets">Available markets</h1>
 
